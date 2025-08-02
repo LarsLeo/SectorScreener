@@ -1,0 +1,41 @@
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #1a1a2e;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding: 2rem;
+    color: #fff;
+}
+
+.sectorBar {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sectorLabel {
+    margin-right: 1.5em;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.sectorCheckbox {
+    accent-color: #00adb5;
+    margin-right: 0.5em;
+}
+
+.sectorName {
+    color: #fff;
+}
+
+.sectorNameSelected {
+    color: #00adb5;
+}
+
+.centeredText {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #aaa;
+}

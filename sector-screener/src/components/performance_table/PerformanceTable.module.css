@@ -1,0 +1,29 @@
+.container {
+    margin-top: 2rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #22223b;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.thead {
+    background: #393e46;
+}
+
+.th,
+.td {
+    padding: 0.7em;
+    border-bottom: 1px solid #393e46;
+}
+
+.positive {
+    color: #43a047;
+}
+
+.negative {
+    color: #e53935;
+}

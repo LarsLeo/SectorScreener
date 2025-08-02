@@ -1,3 +1,17 @@
+# NextJS
+node_modules
+target
+dist
+logs
+public
+.cache
+.vscode
+.DS_Store
+.idea
+.next
+yarn-error.log
+npm-debug.log
+
 # Nestjs specific
 /dist
 /node_modules
