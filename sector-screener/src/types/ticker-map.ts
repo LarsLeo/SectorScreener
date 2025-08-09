@@ -1,4 +1,4 @@
-import { TickerSymbol } from "./TickerData";
+import { TickerSymbol } from "./ticker-data";
 
 export const TICKER_MAP: Record<TickerSymbol, string> = {
     [TickerSymbol.IT]: "Information Technology",

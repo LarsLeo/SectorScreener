@@ -7,9 +7,14 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "db:import-vti": "node scripts/import-vti-data.js",
+        "db:up": "cd .. && docker-compose up -d",
+        "db:down": "cd .. && docker-compose down",
+        "db:logs": "cd .. && docker-compose logs -f mongodb"
     },
     "dependencies": {
+        "mongodb": "^6.3.0",
         "next": "^14.2.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -20,6 +25,7 @@
         "@types/react": "^18.0.0",
         "eslint": "^8.0.0",
         "eslint-config-next": "^14.2.3",
+        "ts-node": "^10.9.2",
         "typescript": "^5.0.0"
     }
 }

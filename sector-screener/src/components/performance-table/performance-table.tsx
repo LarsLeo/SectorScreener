@@ -1,8 +1,8 @@
 import React from "react";
-import type { EnrichedTickerData } from "../../types/frontend_types/EnrichedTickerData";
-import styles from "./PerformanceTable.module.css";
+import type { EnrichedTickerData } from "../../types/enriched-ticker-data";
+import styles from "./performance-table.module.css";
 
-import type { TimeRange } from "../../types/shared_types/TimeRange";
+import type { TimeRange } from "../../types/time-range";
 
 interface PerformanceTableProps {
     data: EnrichedTickerData[];

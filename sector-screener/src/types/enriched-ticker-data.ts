@@ -1,6 +1,6 @@
-import type { TickerData } from "../shared_types/TickerData";
-import type { DataPoint } from "../shared_types/DataPoint";
-import { TimeRange } from "../shared_types/TimeRange";
+import type { TickerData } from "./ticker-data";
+import type { DataPoint } from "./data-point";
+import { TimeRange } from "./time-range";
 
 export interface EnrichedTickerData {
     tickerData: TickerData;

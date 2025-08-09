@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { DataPoint } from '../../src/types/shared_types/DataPoint';
-import type { TickerData } from '../../src/types/TickerData';
-import { TICKER_MAP } from '../../src/types/shared_types/TickerMap';
+import type { DataPoint } from '../../src/types/data-point';
+import type { TickerData } from '../../src/types/ticker-data';
+import { TICKER_MAP } from '../../src/types/ticker-map';
 
 function generateMockData(ticker: string): TickerData {
     const data: DataPoint[] = [];

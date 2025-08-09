@@ -1,11 +1,13 @@
 import React from "react";
-import SectorComparisonPage from "../src/components/sector_comparison_page/SectorComparisonPage";
+import Layout from "../src/components/layout/layout";
+import SectorComparisonPage from "../src/components/sector-comparison-page/sector-comparison-page";
 
 export default function Home() {
     return (
-        <div>
-            <h1>Sector Screener Historical Performance</h1>
-            <SectorComparisonPage />
-        </div>
+        <Layout>
+            <div style={{ padding: "2rem" }}>
+                <SectorComparisonPage />
+            </div>
+        </Layout>
     );
 }

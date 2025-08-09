@@ -1,4 +1,4 @@
-import type { DataPoint } from "./DataPoint";
+import type { DataPoint } from "./data-point";
 
 export enum TickerSymbol {
     IT = "IT",

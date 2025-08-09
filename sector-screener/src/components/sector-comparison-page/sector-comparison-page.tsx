@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import type { EnrichedTickerData, Enrichment } from "../../types/frontend_types/EnrichedTickerData";
-import type { DataPoint } from "../../types/shared_types/DataPoint";
-import type { TickerData } from "../../types/shared_types/TickerData";
-import { TICKER_MAP } from "../../types/shared_types/TickerMap";
-import { TimeRange } from "../../types/shared_types/TimeRange";
-import PerformanceTable from "../performance_table/PerformanceTable";
-import styles from "./SectorComparisonPage.module.css";
+import type { EnrichedTickerData, Enrichment } from "../../types/enriched-ticker-data";
+import type { DataPoint } from "../../types/data-point";
+import type { TickerData } from "../../types/ticker-data";
+import { TICKER_MAP } from "../../types/ticker-map";
+import { TimeRange } from "../../types/time-range";
+import PerformanceTable from "../performance-table/performance-table";
+import styles from "./sector-comparison-page.module.css";
 
 const SYMBOLS = Object.entries(TICKER_MAP).map(([code, name]) => ({ code, name }));
 
@@ -50,7 +50,7 @@ const SectorComparisonPage: React.FC = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`/api/historical_data?ticker=${selectedSymbols.join(",")}`)
+        fetch(`/api/historical-data?ticker=${selectedSymbols.join(",")}`)
             .then((res) => res.json())
             .then((json: TickerData[]) => {
                 const enriched = enrichTickerDataArray(json);
