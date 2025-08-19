@@ -6,6 +6,7 @@ This script fetches ETF financial data from Morningstar API and saves it as JSON
 
 import requests
 import json
+import csv
 import sys
 import os
 from datetime import datetime
@@ -140,6 +141,110 @@ def save_data_to_file(data, filepath):
         return None
 
 
+def save_data_to_csv(data, filepath):
+    """
+    Save the fetched data to a CSV file.
+    
+    Args:
+        data (dict): The data to save
+        filepath (str): The complete file path where to save the CSV data
+    
+    Returns:
+        str: The path to the saved file, or None if save failed
+    """
+    try:
+        # Ensure output directory exists
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        # Extract the API response data
+        api_response = data.get('api_response', {})
+        fund_data = api_response.get('fund', {})
+        
+        # Prepare CSV data with custom column order
+        csv_data = {}
+        
+        # Add priority columns first
+        csv_data['name'] = fund_data.get('name', '')
+        csv_data['secId'] = fund_data.get('secId', '')
+        csv_data['fund_id'] = data.get('fund_id', '')
+        
+        # Add remaining fund fields (excluding the ones already added)
+        for key, value in fund_data.items():
+            if key not in ['name', 'secId']:
+                csv_data[key] = value
+        
+        # Write to CSV
+        with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = list(csv_data.keys())
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerow(csv_data)
+        
+        print(f"CSV data saved to: {filepath}")
+        return filepath
+        
+    except Exception as e:
+        print(f"Error saving CSV data to file: {e}")
+        return None
+
+
+def save_combined_csv(all_fund_data, filepath):
+    """
+    Save all fund data to a single combined CSV file.
+    
+    Args:
+        all_fund_data (list): List of fund data dictionaries
+        filepath (str): The complete file path where to save the combined CSV data
+    
+    Returns:
+        str: The path to the saved file, or None if save failed
+    """
+    try:
+        # Ensure output directory exists
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        if not all_fund_data:
+            print("No fund data to save to combined CSV")
+            return None
+        
+        # Prepare combined CSV data
+        combined_csv_data = []
+        
+        for data in all_fund_data:
+            # Extract the API response data
+            api_response = data.get('api_response', {})
+            fund_data = api_response.get('fund', {})
+            
+            # Prepare CSV row with custom column order
+            csv_row = {}
+            
+            # Add priority columns first
+            csv_row['name'] = fund_data.get('name', '')
+            csv_row['secId'] = fund_data.get('secId', '')
+            csv_row['fund_id'] = data.get('fund_id', '')
+            
+            # Add remaining fund fields (excluding the ones already added)
+            for key, value in fund_data.items():
+                if key not in ['name', 'secId']:
+                    csv_row[key] = value
+            
+            combined_csv_data.append(csv_row)
+        
+        # Write to combined CSV
+        with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+            if combined_csv_data:
+                fieldnames = list(combined_csv_data[0].keys())
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(combined_csv_data)
+        
+        print(f"Combined CSV data saved to: {filepath}")
+        return filepath
+        
+    except Exception as e:
+        print(f"Error saving combined CSV data to file: {e}")
+        return None
+
 
 def main():
     """
@@ -166,6 +271,7 @@ def main():
     successful_fetches = 0
     failed_fetches = 0
     failed_fund_ids = []
+    all_successful_data = []  # Store all successfully fetched data for combined CSV
     
     # Iterate through each fund ID
     for i, fund_id in enumerate(fund_ids, 1):
@@ -187,21 +293,33 @@ def main():
             failed_fund_ids.append(fund_id)
             continue
         
-        # Determine output directory and filename
+        # Determine output directories and filenames
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        output_dir = os.path.join(script_dir, 'latest-data')
-        output_file = os.path.join(output_dir, f"{fund_id}.json")
+        json_output_dir = os.path.join(script_dir, 'latest-data', 'json')
+        csv_output_dir = os.path.join(script_dir, 'latest-data', 'csv')
+        json_output_file = os.path.join(json_output_dir, f"{fund_id}.json")
+        csv_output_file = os.path.join(csv_output_dir, f"{fund_id}.csv")
         
-        # Save data to file
-        saved_file = save_data_to_file(data, output_file)
+        # Save data to JSON file
+        saved_json = save_data_to_file(data, json_output_file)
         
-        if saved_file:
-            print(f"Successfully saved Morningstar data for {fund_id}")
+        # Save data to CSV file
+        saved_csv = save_data_to_csv(data, csv_output_file)
+        
+        if saved_json and saved_csv:
+            print(f"Successfully saved Morningstar data for {fund_id} (JSON and CSV)")
             successful_fetches += 1
+            all_successful_data.append(data)  # Add to combined data list
         else:
             print(f"Failed to save data for {fund_id}")
             failed_fetches += 1
             failed_fund_ids.append(fund_id)
+    
+    # Create combined CSV file if we have successful data
+    if all_successful_data:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        combined_csv_file = os.path.join(script_dir, 'latest-data', 'csv', 'combined-sector-data.csv')
+        save_combined_csv(all_successful_data, combined_csv_file)
     
     # Summary
     print(f"\n--- Summary ---")
