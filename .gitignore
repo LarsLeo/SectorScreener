@@ -39,3 +39,9 @@ lerna-debug.log*
 
 # data fetchers
 **/latest-data
+
+# Python
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
