@@ -36,3 +36,6 @@ lerna-debug.log*
 # temp directory
 .temp
 .tmp
+
+# data fetcher
+data-fetcher/latest-data
