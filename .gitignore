@@ -37,5 +37,5 @@ lerna-debug.log*
 .temp
 .tmp
 
-# data fetcher
-data-fetcher/latest-data
+# data fetchers
+**/latest-data
