@@ -149,25 +149,14 @@ def save_failed_fund_ids(failed_fund_ids: List[str], filename: str = 'failed_fun
 
 def get_fund_ids() -> List[str]:
     """
-    Get the list of fund IDs to process.
+    Get the list of fund IDs to process. This now derives directly from the
+    keys of the fund configuration mapping returned by get_fund_config() so
+    that a single source of truth (ID -> Name mapping) is maintained.
     
     Returns:
-        list: List of fund IDs
+        list: List of fund IDs in the order they are declared in get_fund_config()
     """
-    return [
-        "0P0001PVDX", # Amundi S&P World Comm Svcs Scrn ETF Dist
-        "0P0001K9I4",  # Amundi MSCI Semiconductors ETF Dis
-        "F00001EK0E",  # Amundi S&P World Industrials Scrn ETFDis
-        "0P0001PVEX",  # Amundi S&P World Materials Scrn ETF Dist
-        "0P0001PVEF",  # Amundi S&P World Utilities Scrn ETF Dist
-        "0P0001FHMG",  # HSBC FTSE EPRA/NAREIT Developed ETF
-        "F000011FXJ",  # iShares Digital Security ETF USD Dist
-        "F0000171MM",  # iShares MSCI Wld Fi Sec Advcd ETF USDInc
-        "0P0001IM5L",  # iShares MSCI Wld HlthCrSect AdvcdETF$Inc
-        "0P0001IM5Q",  # iShares MSCI WldCnsmrStpSectAdvcdETF$Inc
-        "0P0001IM5I",  # iShares MSCI WldInfoTechSectAdvcdETF$Inc
-        "0P0001IM5P",  # iShares MSCIWldCnsmrDiscSectAdvcdETF$Inc
-    ]
+    return list(get_fund_config().keys())
 
 
 def get_fund_config() -> Dict[str, str]:
@@ -190,6 +179,7 @@ def get_fund_config() -> Dict[str, str]:
         "0P0001IM5Q": "iShares MSCI World Consumer Staples",
         "0P0001IM5I": "iShares MSCI World Information Technology",
         "0P0001IM5P": "iShares MSCI World Consumer Discretionary",
+        "0P0001IM5M": "iShares MSCI World Energy"
     }
 
 

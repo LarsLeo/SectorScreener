@@ -47,7 +47,7 @@ This module fetches ETF fundamental and price data from Morningstar API and save
 
 The data fetcher uses a predefined list of fund IDs (configured in `helpers.py`) and automatically processes all of them:
 
-1. **Fund ID Configuration**: The list of ETFs to process is defined in the `get_fund_ids()` function
+1. **Fund ID Configuration**: The list of ETFs to process is derived from the keys of the `get_fund_config()` mapping (and `get_fund_ids()` simply returns those keys)
 2. **Fundamental Data**: Fetches key metrics like P/E ratios, expense ratios, asset allocations
 3. **Price Data**: Retrieves historical price information and current valuations
 4. **Data Processing**: Converts raw API responses into both JSON (raw data) and CSV (analysis-ready) formats
@@ -120,7 +120,7 @@ Fund IDs can be found in Morningstar ETF URLs:
 - URL: `https://global.morningstar.com/en-eu/investments/etfs/0P0001PVDX/portfolio`
 - Fund ID: `0P0001PVDX`
 
-To add new ETFs, update the `get_fund_ids()` function in `helpers.py`.
+To add new ETFs, update the `get_fund_config()` mapping in `helpers.py` (the `get_fund_ids()` helper will automatically reflect the change).
 
 ## Error Handling
 
