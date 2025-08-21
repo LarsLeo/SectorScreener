@@ -52,7 +52,6 @@ def save_data_to_file(data, filepath):
         
     except Exception as e:
         print(f"Error saving data to file: {e}")
-        print(f"Error saving data to file: {e}")
         return None
 
 
