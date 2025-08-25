@@ -167,19 +167,25 @@ def get_fund_config() -> Dict[str, str]:
         dict: Dictionary with fund IDs as keys and fund names as values
     """
     return {
+        # Diversified World ETF
+        "0P0001RAAT" : "Invesco FTSE All-World ETF",
+        # "0P000195VN" : "WisdomTree Global Quality Dividend Growth",
+        # "0P00015909" : "WisdomTree Emerging Markets Equity Income",
+        # Sector ETF
         "0P0001PVDX": "Amundi S&P World Communication Services",
-        "0P0001K9I4": "Amundi MSCI Semiconductors",
-        "F00001EK0E": "Amundi S&P World Industrials",
-        "0P0001PVEX": "Amundi S&P World Materials",
-        "0P0001PVEF": "Amundi S&P World Utilities",
-        "0P0001FHMG": "HSBC FTSE EPRA/NAREIT Developed",
-        "F000011FXJ": "iShares Digital Security",
-        "F0000171MM": "iShares MSCI World Financials",
-        "0P0001IM5L": "iShares MSCI World Health Care",
-        "0P0001IM5Q": "iShares MSCI World Consumer Staples",
         "0P0001IM5I": "iShares MSCI World Information Technology",
         "0P0001IM5P": "iShares MSCI World Consumer Discretionary",
-        "0P0001IM5M": "iShares MSCI World Energy"
+        # "F00001EK0E": "Amundi S&P World Industrials",
+        # "0P0001PVEX": "Amundi S&P World Materials",
+        # "0P0001PVEF": "Amundi S&P World Utilities",
+        # "0P0001FHMG": "HSBC FTSE EPRA/NAREIT Developed",
+        # "F0000171MM": "iShares MSCI World Financials",
+        # "0P0001IM5L": "iShares MSCI World Health Care",
+        # "0P0001IM5Q": "iShares MSCI World Consumer Staples",
+        # "0P0001IM5M": "iShares MSCI World Energy"
+        # Additional Tech Sectors
+        "F000011FXJ": "iShares Digital Security",
+        "0P0001K9I4": "Amundi MSCI Semiconductors",
     }
 
 
